@@ -34,9 +34,11 @@ public class CatrgoryInfo implements ProcessStrategy {
     //对小类目进行解析 --获取CatgoryId
     public boolean praseCatrgory(Page page){
 
-        String catgoryId = StringUtils.toEncodedString(page.getRequest().getRequestBody().getBody(), Charset.forName("UTF-8")).split("=")[1];
+        String catgoryId = StrUtils.catchTarget(StringUtils.toEncodedString(page.getRequest().getRequestBody().getBody(), Charset.forName("UTF-8")),"(.+\\d)");
         String JsonData = page.getJson().toString();
         return urlUtils.setJsonFile(catgoryId,JsonData);
+
+
     }
 
     @Override

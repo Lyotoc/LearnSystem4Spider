@@ -4,6 +4,7 @@ import org.Lyoto.Spider.DefaultSpider;
 import org.Lyoto.Spider.Strategy.impl.CatrgoryInfo;
 import org.Lyoto.Spider.Strategy.impl.IteratorProcessor;
 import org.Lyoto.Utils.MOOCUtils.Catgory;
+import org.Lyoto.Utils.MOOCUtils.LoadJsonFile;
 import org.Lyoto.Utils.MOOCUtils.MOOCEntity;
 import org.Lyoto.Utils.MOOCUtils.MOOCHeader;
 import org.Lyoto.Utils.UrlUtils;
@@ -27,29 +28,17 @@ import java.util.ArrayList;
 public class SpiderStak {
 
     @Autowired
-    Catgory catgory;
-    @Autowired
-    UrlUtils urlUtils;
-    @Autowired
     DefaultSpider defaultSpider;
+    @Autowired
+    LoadJsonFile loadJsonFile;
 
 
 
     @Scheduled(initialDelay = 1000,fixedDelay = 100*1000)
     public void run(){
         Spider spider = Spider.create(defaultSpider);
-        ArrayList<String> catgoryLsit = new ArrayList<>();
-        catgoryLsit.addAll(urlUtils.catgoryId(catgory.getCatgoryList()));
-        for(String catgory:catgoryLsit){
-            try {
-                HttpRequestBody custom = new HttpRequestBody().custom(("channelId=" + catgory).getBytes("UTF8"), MOOCHeader.ContentType, "UTF8");
-                Request request = urlUtils.mocChannelUrl_post();
-                request.setRequestBody(custom);
-            spider = spider.addRequest(request);
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
-        }
+            //判断当前Json文件状态
+        spider = loadJsonFile.jsonCheck(spider);
         spider.setScheduler(new QueueScheduler().setDuplicateRemover(new RedisPriorityScheduler("localhost")))
                 .thread(10)
                 .runAsync();

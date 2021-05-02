@@ -7,6 +7,8 @@ import us.codecraft.webmagic.selector.JsonPathSelector;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author Lyoto
@@ -71,6 +73,15 @@ public class StrUtils {
      public static String jsoupParse(Html html,String selector){
         String attr = null;
         return jsoupParse(html,selector,attr);
+    }
+    public static String catchTarget(String str,String regex){
+         String result = "";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(str);
+        if(matcher.find()){
+           result = matcher.group(0);
+        }
+        return result;
     }
 
 

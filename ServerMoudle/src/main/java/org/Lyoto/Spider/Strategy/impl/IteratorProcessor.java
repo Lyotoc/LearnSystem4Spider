@@ -38,7 +38,7 @@ public class IteratorProcessor extends FilterProcessor {
     @Override
     public void doProcess(Page page) {
 
-        if (StringUtils.startsWith(page.getRequest().getUrl(), "https://www.icourse163.org/channel/3002.htm")) {
+        if (StringUtils.startsWith(page.getRequest().getUrl(), "https://www.icourse163.org/web/j/channelBean.listMocChannelCategoryRel.rpc?csrfKey=")) {
             requestCache.addAll(page.getHtml().regex("").all());
             page.addTargetRequests(new ArrayList<>(requestCache));
             requestCache.clear();

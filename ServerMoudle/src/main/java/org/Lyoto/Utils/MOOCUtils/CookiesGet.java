@@ -59,8 +59,10 @@ public class CookiesGet {
          return cookies;
      }
 
-
-    //    设置请求信息
+    /**
+     *  设置请求信息
+     * @return
+     */
     private static RequestConfig getConfig() {
         RequestConfig config = RequestConfig.custom()
                 .setConnectTimeout(1000) //创建连接的最长时间
