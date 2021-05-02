@@ -91,6 +91,11 @@ public class MOOCEntity {
          this.csrfKey = cookies[0];
         return this.domian+content+index_frist+"."+index_second+suffix+"?csrfKey="+csrfKey;
     }
+
+    /**
+     *
+     * @return
+     */
     public Request request_POST(){
         Request request = new Request();
         request.setMethod("post")

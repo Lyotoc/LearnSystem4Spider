@@ -39,9 +39,12 @@ public class SpiderStak {
         Spider spider = Spider.create(defaultSpider);
             //判断当前Json文件状态
         spider = loadJsonFile.jsonCheck(spider);
+        if(loadJsonFile.isJsonExist()){
+            spider = loadJsonFile.loadJson(spider);
+        }
         spider.setScheduler(new QueueScheduler().setDuplicateRemover(new RedisPriorityScheduler("localhost")))
                 .thread(10)
-                .runAsync();
+                .run();
     }
 
 

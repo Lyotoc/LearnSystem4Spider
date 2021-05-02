@@ -1,8 +1,12 @@
 package org.Lyoto.Utils.MOOCUtils;
 
+import org.Lyoto.Utils.StrUtils;
+import org.Lyoto.Utils.UrlUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -31,7 +35,8 @@ public class Catgory {
     public static final String MEDICAL= "https://www.icourse163.org/channel/3008.htm";
 //音乐与舞蹈
     public static final String MD= "https://www.icourse163.org/channel/15001.htm";
-
+@Autowired
+    UrlUtils urlUtils;
     /***
      *
      * @return 大类别组
@@ -50,5 +55,9 @@ public class Catgory {
         catgoryList.add(MD);
         return catgoryList;
     }
-
+    public  HashSet<String> getCatgoryId() {
+        final HashSet<String> hashSet = new HashSet<>();
+       hashSet.addAll(urlUtils.catgoryId(this.getCatgoryList()));
+       return hashSet;
+        }
 }

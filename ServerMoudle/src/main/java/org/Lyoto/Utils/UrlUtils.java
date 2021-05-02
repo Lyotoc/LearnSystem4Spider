@@ -70,6 +70,18 @@ public class UrlUtils {
     }
 
     /**
+     * 获取小类目详细Url
+     * @return
+     */
+    public Request mocSearchBeanUrl_Post(){
+        moocEntity.setIndex_frist("mocSearchBean");
+        moocEntity.setIndex_second("searchCourseCardByChannelAndCategoryId");
+        return moocEntity.request_POST();
+//        https://www.icourse163.org/web/j/mocSearchBean.searchCourseCardByChannelAndCategoryId.rpc?csrfKey=1f4d71b4dd4c466d9be912fd399818e3
+
+    }
+
+    /**
      * 转存json为File
      * @param jsonData
      */
