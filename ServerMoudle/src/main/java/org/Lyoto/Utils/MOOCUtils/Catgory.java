@@ -5,9 +5,7 @@ import org.Lyoto.Utils.UrlUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author Lyoto
@@ -37,6 +35,19 @@ public class Catgory {
     public static final String MD= "https://www.icourse163.org/channel/15001.htm";
 @Autowired
     UrlUtils urlUtils;
+    public static HashMap<Integer,String> channelMap = new HashMap<>();
+    static{
+        channelMap.put(3002,"COMPUTER");
+        channelMap.put(2002,"ENGLISH");
+        channelMap.put(2003,"SCIENCE");
+        channelMap.put(3003,"ENGINEERING");
+        channelMap.put(3004,"ECONOMIC");
+        channelMap.put(3007,"PSYCHOLOGY");
+        channelMap.put(3005,"LHP");
+        channelMap.put(3006,"ART");
+        channelMap.put(3008,"MEDICAL");
+        channelMap.put(15001,"MD");
+    }
     /***
      *
      * @return 大类别组
@@ -60,4 +71,8 @@ public class Catgory {
        hashSet.addAll(urlUtils.catgoryId(this.getCatgoryList()));
        return hashSet;
         }
-}
+    public String checkChannelId (Integer ChannelId){
+        return channelMap.get(ChannelId);
+        }
+    }
+

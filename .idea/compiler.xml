@@ -7,10 +7,10 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="ServerMoudle" />
-        <module name="LearnSystem4Spider" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="LearnSystem4Spider" target="1.5" />
       <module name="Spider" target="1.8" />
     </bytecodeTargetLevel>
   </component>

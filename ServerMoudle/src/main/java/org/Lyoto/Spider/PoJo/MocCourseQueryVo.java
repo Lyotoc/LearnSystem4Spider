@@ -14,6 +14,16 @@ public class MocCourseQueryVo implements Serializable {
     private Integer pageIndex = 1;
     private Integer pageSize = 20;
 
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    private String categoryName;
+
 
 
     public Long getCategoryId() {
@@ -64,4 +74,42 @@ public class MocCourseQueryVo implements Serializable {
         this.pageSize = pageSize;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        MocCourseQueryVo that = (MocCourseQueryVo) o;
+
+        if (categoryId != null ? !categoryId.equals(that.categoryId) : that.categoryId != null) return false;
+        if (categoryChannelId != null ? !categoryChannelId.equals(that.categoryChannelId) : that.categoryChannelId != null)
+            return false;
+        if (orderBy != null ? !orderBy.equals(that.orderBy) : that.orderBy != null) return false;
+        if (status != null ? !status.equals(that.status) : that.status != null) return false;
+        if (pageIndex != null ? !pageIndex.equals(that.pageIndex) : that.pageIndex != null) return false;
+        return pageSize != null ? pageSize.equals(that.pageSize) : that.pageSize == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = categoryId != null ? categoryId.hashCode() : 0;
+        result = 31 * result + (categoryChannelId != null ? categoryChannelId.hashCode() : 0);
+        result = 31 * result + (orderBy != null ? orderBy.hashCode() : 0);
+        result = 31 * result + (status != null ? status.hashCode() : 0);
+        result = 31 * result + (pageIndex != null ? pageIndex.hashCode() : 0);
+        result = 31 * result + (pageSize != null ? pageSize.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "MocCourseQueryVo{" +
+                "categoryId=" + categoryId +
+                ", categoryChannelId=" + categoryChannelId +
+                ", orderBy=" + orderBy +
+                ", status=" + status +
+                ", pageIndex=" + pageIndex +
+                ", pageSize=" + pageSize +
+                '}';
+    }
 }
