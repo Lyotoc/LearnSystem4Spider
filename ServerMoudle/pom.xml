@@ -106,6 +106,7 @@
             <directory>src/main/java</directory>
             <includes>
                 <include>**/*.properties</include>
+                <include>**/*.xml</include>
             </includes>
         </resource>
         <resource>

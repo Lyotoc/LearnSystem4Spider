@@ -40,7 +40,7 @@ public class CategoryInfo implements ProcessStrategy {
     }
 //        对二级目录响应体数据进行解析
         if(StringUtils.startsWith(page.getRequest().getUrl(),"https://www.icourse163.org/web/j/mocSearchBean.searchCourseCardByChannelAndCategoryId.rpc?csrfKey=")){
-
+            this.praseSecondCategory(page);
         }
     }
 
@@ -111,11 +111,11 @@ public class CategoryInfo implements ProcessStrategy {
             //当前任期
             courseInfo.setCurrentTermId(Integer.valueOf(new JsonPathSelector("$.currentTermId").select(course)));
             //发布日期
-            Integer time = Integer.valueOf(new JsonPathSelector("$.firstPublishTime").select(course));
+            Long time = Long.valueOf(new JsonPathSelector("$.firstPublishTime").select(course));
             Timestamp timestamp = new Timestamp(time);
             courseInfo.setPublishDate(timestamp);
-            page.putField("courseInfo",courseInfo);
         //将封装对象数据传入持久层
+            page.putField("courseInfo",courseInfo);
 
     //进行下一步，对课程的m3u8详细数据进行爬取
         }

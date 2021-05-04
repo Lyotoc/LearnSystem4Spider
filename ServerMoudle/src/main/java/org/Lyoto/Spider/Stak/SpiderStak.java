@@ -1,11 +1,14 @@
 package org.Lyoto.Spider.Stak;
 
 import org.Lyoto.Spider.DefaultSpider;
+import org.Lyoto.Spider.PipeLine.StrategyPiperLine;
 import org.Lyoto.Utils.MOOCUtils.LoadJsonFile;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.Spider;
+import us.codecraft.webmagic.pipeline.ConsolePipeline;
 import us.codecraft.webmagic.scheduler.QueueScheduler;
 import us.codecraft.webmagic.scheduler.RedisPriorityScheduler;
 
@@ -21,6 +24,8 @@ public class SpiderStak {
     @Autowired
     LoadJsonFile loadJsonFile;
 
+    @Autowired
+    StrategyPiperLine strategyPiperLine;
 
 
     @Scheduled(initialDelay = 1000,fixedDelay = 100*1000)
@@ -32,6 +37,7 @@ public class SpiderStak {
             spider = loadJsonFile.loadJson(spider);
         }
         spider.setScheduler(new QueueScheduler().setDuplicateRemover(new RedisPriorityScheduler("localhost")))
+                .addPipeline(strategyPiperLine)
                 .thread(10)
                 .run();
     }
