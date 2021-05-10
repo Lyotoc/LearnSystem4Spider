@@ -16,21 +16,24 @@ public class DefaultSpider implements PageProcessor {
     /**
      * 如果访问超时，等两分钟
      */
-    private static int ONE_MINUTES =2*1000*60;
-
     private static int ONE_SECOUND = 1000;
+    private static int ONE_MINUTES =30*ONE_SECOUND*2;
+
     protected ProcessStrategy processStrategy;
 
     public DefaultSpider (@Qualifier("iteratorProcessor") ProcessStrategy processStrategy) {
         this.processStrategy = processStrategy;
     }
     private Site setSite(){
-        //重试三次，等待1秒
+
+        //重试三次，等待2秒
         return processStrategy
                 .addSite()
-                .setRetrySleepTime(3)
-                .setSleepTime(2*ONE_SECOUND)
-                .setSleepTime(2*ONE_MINUTES);
+                .setCycleRetryTimes(2)
+                .setRetrySleepTime(2*ONE_SECOUND)
+                .setRetryTimes(2)
+                .setTimeOut(ONE_MINUTES/2)
+                .setSleepTime(2*ONE_SECOUND);
     }
 
 

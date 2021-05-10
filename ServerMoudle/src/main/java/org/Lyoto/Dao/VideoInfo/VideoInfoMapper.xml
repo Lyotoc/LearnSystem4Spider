@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.Lyoto.Dao.VideoInfo.VideoInfoMapper" >
+    <insert id="addVideoInfo" parameterType="org.Lyoto.Pojo.courseVideoInfo">
+    insert into videoInfo_all (videoId,duration,videoname,videoImgUrl,size,videoUrl,format,currentTermId)
+    values (#{videoId,jdbcType=BIGINT}, #{duration,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+      #{videoImgUrl,jdbcType=VARCHAR}, #{size,jdbcType=VARCHAR}, #{videoUrl,jdbcType=CLOB},
+      #{format,jdbcType=VARCHAR},#{currentTermId,jdbcType=INTEGER})
+  </insert>
+</mapper>

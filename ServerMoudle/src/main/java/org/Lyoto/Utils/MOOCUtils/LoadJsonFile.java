@@ -122,6 +122,10 @@ public class LoadJsonFile {
             return spider;
     }
 
+    /**
+     * Spider容器第一次加载各大类的Url
+     * @param spider
+     */
     public void firstLoad(Spider spider){
         ArrayList<String> catgoryLsit = new ArrayList<>();
         catgoryLsit.addAll(urlUtils.catgoryId(catgory.getCatgoryList()));

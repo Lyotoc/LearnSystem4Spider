@@ -83,6 +83,15 @@ public class StrUtils {
         }
         return result;
     }
+    public static ArrayList<String> catchTargetList(String str, String regex){
+         ArrayList<String> target = new ArrayList<>();
+         Pattern pattern = Pattern.compile(regex);
+         Matcher matcher = pattern.matcher(str);
+         while(matcher.find()){
+             target.add(matcher.group(0));
+         }
+         return target;
+    }
 
 
 }

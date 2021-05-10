@@ -62,8 +62,8 @@ public class UrlUtils {
      * 获取大类目下的小类目
      */
     public Request mocChannelUrl_post(){
-        moocEntity.setIndex_frist("channelBean");
-        moocEntity.setIndex_second("listMocChannelCategoryRel");
+        moocEntity.setIndex_frist(MOOCEntity.CATEGORY_frist);
+        moocEntity.setIndex_second(MOOCEntity.CATEGORY_second);
         return moocEntity.request_POST();
 //        https://www.icourse163.org/web/j/channelBean.listMocChannelCategoryRel.rpc?csrfKey=c1aa3b6a03654e76b4c818532a45d0a3
 
@@ -74,11 +74,37 @@ public class UrlUtils {
      * @return
      */
     public Request mocSearchBeanUrl_Post(){
-        moocEntity.setIndex_frist("mocSearchBean");
-        moocEntity.setIndex_second("searchCourseCardByChannelAndCategoryId");
+        moocEntity.setIndex_frist(MOOCEntity.CONTENTURL_frist);
+        moocEntity.setIndex_second(MOOCEntity.CONTENTURL_second);
         return moocEntity.request_POST();
 //        https://www.icourse163.org/web/j/mocSearchBean.searchCourseCardByChannelAndCategoryId.rpc?csrfKey=1f4d71b4dd4c466d9be912fd399818e3
 
+    }
+
+    /**
+     * 课程信息详细数据的请求
+     * @return Post请求详细
+     */
+    public Request getMocTermDto_Post(){
+        moocEntity.setContent(MOOCEntity.SCRIPT);
+        moocEntity.setIndex_frist(MOOCEntity.SCRIPT_frist);
+        moocEntity.setIndex_second(MOOCEntity.SCRIPT_second);
+        moocEntity.setSuffix(".dwr");
+        return moocEntity.getCourseContent();
+    }
+
+    /**
+     * 获取详细的视频信息及Signature
+     * @return  详细视频Request
+     */
+    public Request getVideoSignDto_post(){
+        moocEntity.setContent(MOOCEntity.CONTENTURL);
+        moocEntity.setIndex_frist(MOOCEntity.SIGN_frist);
+        moocEntity.setIndex_second(MOOCEntity.SIGN_second);
+        moocEntity.setSuffix(MOOCEntity.DEFAULT_SUFFIX);
+        Request request = moocEntity.request_POST();
+        request.addCookie("videoResolutionType","3");
+        return request;
     }
 
     /**

@@ -16,14 +16,25 @@ public class MOOCEntity {
     //域名
     private final String domian = "https://www.icourse163.org";
     //内容
-    private  String content = "/web/j/";
+    public static final String CONTENTURL ="/web/j/";
+    public static final String SCRIPT ="/dwr/call/plaincall/";
+    private  String content = CONTENTURL;
     //一级页面参数
-    private String index_frist = "indexBeanV3";
+    public static final String CONTENTURL_frist ="mocSearchBean";
+    public static final String CATEGORY_frist ="channelBean";
+    public static final String SCRIPT_frist ="CourseBean";
+    public static final String SIGN_frist ="resourceRpcBean";
+    private String index_frist = CONTENTURL_frist;
     //二级参数
-    private String index_second = "getCategoryInfo";
+    public static final String CONTENTURL_second ="searchCourseCardByChannelAndCategoryId";
+    public static final String SCRIPT_second ="getMocTermDto";
+    public static final String CATEGORY_second ="listMocChannelCategoryRel";
+    public static final String SIGN_second ="getResourceToken";
+    private String index_second = CONTENTURL_second;
 
     //后缀
-    private  String suffix =".rpc";
+    public static final String DEFAULT_SUFFIX =".rpc";
+    private  String suffix =DEFAULT_SUFFIX;
     //请求参数
     private String csrfKey = "";
 
@@ -99,8 +110,30 @@ public class MOOCEntity {
     public Request request_POST(){
         Request request = new Request();
         request.setMethod("post")
+                .addCookie("NTESSTUDYSI",this.setCookies()[0])
+                .addCookie("EDUWEBDEVICE",this.setCookies()[1])
                 .setUrl(this.method_GET());
         return request;
     }
 
+    /**
+     * post方式加入请求
+     * @return
+     */
+    public Request getCourseContent(){
+        Request request = new Request();
+        request.setMethod("post")
+                .addCookie("NTESSTUDYSI",this.setCookies()[0])
+                .addCookie("EDUWEBDEVICE",this.setCookies()[1])
+                .setUrl(this.domian+content+index_frist+"."+index_second+suffix);
+        return request;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setSuffix(String suffix) {
+        this.suffix = suffix;
+    }
 }

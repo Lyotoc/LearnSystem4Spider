@@ -1,9 +1,11 @@
 package org.Lyoto.Utils.MOOCUtils;
 
+import com.jayway.jsonpath.PathNotFoundException;
 import org.Lyoto.Utils.StrUtils;
 import org.Lyoto.Utils.UrlUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import us.codecraft.webmagic.selector.JsonPathSelector;
 
 import java.util.*;
 
@@ -74,5 +76,7 @@ public class Catgory {
     public String checkChannelId (Integer ChannelId){
         return channelMap.get(ChannelId);
         }
+
+
     }
 

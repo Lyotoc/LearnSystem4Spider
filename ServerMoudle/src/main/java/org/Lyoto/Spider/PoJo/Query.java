@@ -12,8 +12,8 @@ public class Query {
     private Integer DEFAULT_OFFSET = 0;
     private Integer pageSize = 20;
     private Integer pageIndex = 1;
-    private Integer totlePageCount = 4;
-    private Integer totleCount = 72;
+    private Integer totlePageCount ;
+    private Integer totleCount ;
     private Integer offset = 0;
     private Integer limit = 20;
 

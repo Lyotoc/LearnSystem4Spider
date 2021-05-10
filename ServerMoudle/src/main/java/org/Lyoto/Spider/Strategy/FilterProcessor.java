@@ -39,8 +39,7 @@ public class FilterProcessor implements ProcessStrategy {
      */
     @Override
     public Site addSite() {
-        return processStrategy
-                .addSite()
+        return Site.me()
                 .setCharset("utf8")
                 .setUserAgent(MOOCHeader.UserAgent)
                 .addHeader("Content-Type",MOOCHeader.ContentType)

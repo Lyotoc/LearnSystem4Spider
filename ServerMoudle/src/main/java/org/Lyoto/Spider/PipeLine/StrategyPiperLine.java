@@ -1,11 +1,17 @@
 package org.Lyoto.Spider.PipeLine;
 
 import org.Lyoto.Pojo.CourseInfo;
+import org.Lyoto.Pojo.courseVideoInfo;
+import org.Lyoto.Service.VideoInfoService;
 import org.Lyoto.Spider.PipeLine.Impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.ResultItems;
 import us.codecraft.webmagic.Task;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 
 /**
  * @author Lyoto
@@ -33,31 +39,71 @@ public class StrategyPiperLine implements CoursePiperLine {
     PsychologyCoursePiperLine psychologyCoursePiperLine;
     @Autowired
     ScienceCoursePiper scienceCoursePiper;
+    @Autowired
+    VideoInfoService videoInfoService;
     @Override
-    public void process(ResultItems resultItems, Task task) {
-        CourseInfo courseInfo = (CourseInfo) resultItems.get("courseInfo");
-        switch (courseInfo.getChannelId()){
-            case 3002:computerCoursePiperLine.process(resultItems,task);
-            break;
-            case 2002:englishCoursePiperLine.process(resultItems, task);
-            break;
-            case 2003:scienceCoursePiper.process(resultItems, task);
-                break;
-            case 3003:engineeringCoursePiperLine.process(resultItems, task);
-                break;
-            case 3004:economicCoursePiperLine.process(resultItems, task);
-                break;
-            case 3007:psychologyCoursePiperLine.process(resultItems, task);
-                break;
-            case 3005:lhpCoursePiperLine.process(resultItems, task);
-                break;
-            case 3006:artCoursePiperLine.process(resultItems, task);
-                break;
-            case 3008:medicalCoursePiperLine.process(resultItems, task);
-                break;
-            case 15001:mdCoursePiperLine.process(resultItems,task);
-                break;
+    public  void  process(ResultItems resultItems, Task task) {
+
+        if(resultItems.get("courseInfoList")!=null){
+            saveCourseInfo(resultItems,task);
+        }
+        if(resultItems.get("videoInfo")!=null){
+            saveVideoInfo(resultItems,task);
         }
 
+    }
+
+    /**
+     *  保存课程信息
+     * @param resultItems
+     * @param task
+     */
+    public void saveCourseInfo(ResultItems resultItems, Task task){
+        ArrayList<CourseInfo> courseInfoList  = new ArrayList<>();
+        synchronized (this) {
+            courseInfoList.addAll(resultItems.get("courseInfoList"));
+            switch (courseInfoList.get(0).getChannelId()) {
+                case 3002:
+                    computerCoursePiperLine.process(resultItems, task);
+                    break;
+                case 2002:
+                    englishCoursePiperLine.process(resultItems, task);
+                    break;
+                case 2003:
+                    scienceCoursePiper.process(resultItems, task);
+                    break;
+                case 3003:
+                    engineeringCoursePiperLine.process(resultItems, task);
+                    break;
+                case 3004:
+                    economicCoursePiperLine.process(resultItems, task);
+                    break;
+                case 3007:
+                    psychologyCoursePiperLine.process(resultItems, task);
+                    break;
+                case 3005:
+                    lhpCoursePiperLine.process(resultItems, task);
+                    break;
+                case 3006:
+                    artCoursePiperLine.process(resultItems, task);
+                    break;
+                case 3008:
+                    medicalCoursePiperLine.process(resultItems, task);
+                    break;
+                case 15001:
+                    mdCoursePiperLine.process(resultItems, task);
+                    break;
+            }
+        }
+    }
+
+    /**
+     *
+     * @param resultItems
+     * @param task
+     */
+    public void saveVideoInfo(ResultItems resultItems,Task task){
+        courseVideoInfo videoInfo = resultItems.get("videoInfo");
+        videoInfoService.addVideoInfo(videoInfo);
     }
 }

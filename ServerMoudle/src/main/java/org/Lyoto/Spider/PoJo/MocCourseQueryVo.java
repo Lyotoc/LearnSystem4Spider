@@ -13,6 +13,7 @@ public class MocCourseQueryVo implements Serializable {
     private  Integer status = 10;
     private Integer pageIndex = 1;
     private Integer pageSize = 20;
+    private String categoryName;
 
     public String getCategoryName() {
         return categoryName;
@@ -22,7 +23,6 @@ public class MocCourseQueryVo implements Serializable {
         this.categoryName = categoryName;
     }
 
-    private String categoryName;
 
 
 
